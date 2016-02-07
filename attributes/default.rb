@@ -1,0 +1,3 @@
+####
+default['vsts']['pool'] = 'windows'
+####

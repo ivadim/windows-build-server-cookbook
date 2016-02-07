@@ -1,0 +1,25 @@
+---
+driver:
+  name: vagrant
+  gui: true
+  customize:
+    cpus: 2
+    memory: 1024
+
+provisioner:
+  name: chef_zero
+  data_bags_path: data_bags
+  client_rb:
+    add_formatter: <%= ENV['CI'] == 'true' ? 'minimal' : 'doc' %>
+
+platforms:
+  - name: windows81
+    driver_config:
+      guest: windows
+      communicator: 'winrm'
+      box: win81x64-enterprise
+
+suites:
+  - name: default
+    run_list:
+      - recipe[windows-build-server::default]
